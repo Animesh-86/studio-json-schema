@@ -330,7 +330,23 @@ const GraphView = ({
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [searchString, nodes]);
+  }, [searchString]);
+    useEffect(() => {
+    if (matchCount <= 1) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "Enter") {
+        e.preventDefault();
+        navigateMatch("next");
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        navigateMatch("prev");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [matchCount, navigateMatch]);
 
   return (
     <div ref={containerRef} className="relative w-full h-full">
