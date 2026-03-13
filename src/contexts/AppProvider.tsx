@@ -37,6 +37,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setSchemaFormat(format);
   };
 
+  const [isAutoZoomEnabled, setIsAutoZoomEnabled] = useState<boolean>(true);
+
+  const toggleAutoZoom = useCallback(() => {
+    setIsAutoZoomEnabled((prev) => !prev);
+  }, []);
+
   const [selectedNode, setSelectedNode] = useState<SelectedNode | null>(null);
 
   const toggleFullScreen = useCallback(() => {
@@ -79,6 +85,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     toggleFullScreen,
     schemaFormat,
     changeSchemaFormat,
+    isAutoZoomEnabled,
+    toggleAutoZoom,
     selectedNode,
     setSelectedNode,
   };

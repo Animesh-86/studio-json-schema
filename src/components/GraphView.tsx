@@ -49,7 +49,7 @@ const GraphView = ({
   compiledSchema: CompiledSchema | null;
 }) => {
   const { setCenter, getZoom, fitView } = useReactFlow();
-  const { selectedNode, setSelectedNode } = useContext(AppContext);
+  const { selectedNode, setSelectedNode, isAutoZoomEnabled } = useContext(AppContext);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [nodes, setNodes, onNodeChange] = useNodesState<GraphNode>([]);
@@ -275,7 +275,9 @@ const GraphView = ({
     const observer = new ResizeObserver(() => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
-        fitView({ duration: 800, padding: 0.05 });
+        if (isAutoZoomEnabled) {
+          fitView({ duration: 800, padding: 0.05 });
+        }
       }, 100);
     });
 
@@ -285,7 +287,7 @@ const GraphView = ({
       observer.disconnect();
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, [isAutoZoomEnabled, fitView]);
 
   useEffect(() => {
     const trimmed = searchString.trim();

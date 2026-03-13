@@ -18,6 +18,9 @@ type AppContextType = {
   schemaFormat: SchemaFormat;
   changeSchemaFormat: (format: SchemaFormat) => void;
 
+  isAutoZoomEnabled: boolean;
+  toggleAutoZoom: () => void;
+
   selectedNode: SelectedNode | null;
 
   setSelectedNode: (selectedNode: SelectedNode | null) => void;

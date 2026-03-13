@@ -5,7 +5,7 @@ import { AppContext, type SchemaFormat } from "../contexts/AppContext";
 import FullscreenToggleButton from "./FullscreenToggleButton";
 
 const NavigationBar = () => {
-  const { theme, toggleTheme, schemaFormat, changeSchemaFormat } =
+  const { theme, toggleTheme, schemaFormat, changeSchemaFormat, isAutoZoomEnabled, toggleAutoZoom } =
     useContext(AppContext);
 
   return (
@@ -29,7 +29,25 @@ const NavigationBar = () => {
       </div>
 
       <ul className="flex gap-5 mr-10">
-        <li>
+        <li className="flex items-center">
+          <button
+            className={`text-xs px-2 py-1 rounded border transition-colors cursor-pointer ${
+              isAutoZoomEnabled 
+                ? "border-green-500 text-green-500 hover:bg-green-500/10" 
+                : "border-red-500 text-red-500 hover:bg-red-500/10"
+            }`}
+            onClick={toggleAutoZoom}
+            data-tooltip-id="toggle-auto-zoom"
+          >
+            Auto Zoom: {isAutoZoomEnabled ? "ON" : "OFF"}
+          </button>
+          <Tooltip
+            id="toggle-auto-zoom"
+            content={isAutoZoomEnabled ? "Disable Auto Zoom on resize" : "Enable Auto Zoom on resize"}
+            style={{ fontSize: "10px" }}
+          />
+        </li>
+        <li className="flex items-center">
           <select
             onChange={(e) => changeSchemaFormat(e.target.value as SchemaFormat)}
             className="text-sm border rounded-sm bg-[var(--bg-color)] text-[var(--dropdown-text-color)] border-[var(--navigation-text-color)] cursor-pointer"
@@ -39,7 +57,7 @@ const NavigationBar = () => {
             <option value="yaml">YAML</option>
           </select>
         </li>
-        <li>
+        <li className="flex items-center">
           <button
             className="text-xl cursor-pointer"
             onClick={toggleTheme}
@@ -57,7 +75,7 @@ const NavigationBar = () => {
             style={{ fontSize: "10px" }}
           />
         </li>
-        <li>
+        <li className="flex items-center">
           <a
             href="https://github.com/jagpreetrahi/visualize-json-schema"
             target="_blank"
@@ -73,7 +91,7 @@ const NavigationBar = () => {
             />
           </a>
         </li>
-        <li>
+        <li className="flex items-center">
           <a
             href="https://github.com/jagpreetrahi/visualize-json-schema?tab=readme-ov-file#json-schema-visualizer"
             target="_blank"
@@ -89,7 +107,7 @@ const NavigationBar = () => {
             />
           </a>
         </li>
-        <li>
+        <li className="flex items-center">
           <FullscreenToggleButton />
         </li>
       </ul>
