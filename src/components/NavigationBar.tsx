@@ -29,7 +29,7 @@ const NavigationBar = () => {
       </div>
 
       <ul className="flex gap-5 mr-10">
-        <li className="flex items-center">
+        <li>
           <select
             onChange={(e) => changeSchemaFormat(e.target.value as SchemaFormat)}
             className="text-sm border rounded-sm bg-[var(--bg-color)] text-[var(--dropdown-text-color)] border-[var(--navigation-text-color)] cursor-pointer"
@@ -39,7 +39,7 @@ const NavigationBar = () => {
             <option value="yaml">YAML</option>
           </select>
         </li>
-        <li className="flex items-center">
+        <li>
           <button
             className="text-xl cursor-pointer"
             onClick={toggleTheme}
@@ -57,7 +57,7 @@ const NavigationBar = () => {
             style={{ fontSize: "10px" }}
           />
         </li>
-        <li className="flex items-center">
+        <li>
           <a
             href="https://github.com/jagpreetrahi/visualize-json-schema"
             target="_blank"
@@ -73,7 +73,7 @@ const NavigationBar = () => {
             />
           </a>
         </li>
-        <li className="flex items-center">
+        <li>
           <a
             href="https://github.com/jagpreetrahi/visualize-json-schema?tab=readme-ov-file#json-schema-visualizer"
             target="_blank"
@@ -89,7 +89,7 @@ const NavigationBar = () => {
             />
           </a>
         </li>
-        <li className="flex items-center">
+        <li>
           <FullscreenToggleButton />
         </li>
       </ul>
