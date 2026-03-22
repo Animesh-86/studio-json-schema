@@ -34,7 +34,7 @@ const NavigationBar = () => {
         </div>
       )}
 
-      <ul className={`flex items-center gap-5 ${isFullScreen ? 'mr-0' : 'mr-10'}`}>
+      <ul className={`flex items-center gap-5 ${isFullScreen ? 'mr-0' : 'mr-4'}`}>
         <li className="flex items-center">
           <select
             onChange={(e) => changeSchemaFormat(e.target.value as SchemaFormat)}
