@@ -289,7 +289,7 @@ const MonacoEditor = () => {
       }`}
     >
       {isFullScreen && (
-        <ul className="w-full px-4 py-1 bg-[var(--bg-color)] flex justify-end items-center gap-5">
+        <ul className={`w-full px-4 py-1 bg-[var(--bg-color)] flex justify-end items-center gap-5 z-10 ${theme === 'light' ? 'shadow-md border-b-[1px] border-gray-200' : ''}`}>
           <li className="flex items-center">
             <select
               onChange={(e) => changeSchemaFormat(e.target.value as SchemaFormat)}
