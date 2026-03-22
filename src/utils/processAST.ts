@@ -101,10 +101,6 @@ export const processAST: ProcessAST = ({ ast, schemaUri, nodes, edges, parentId,
         const targetNode = renderedNodes.get(schemaUri);
         const backEdgeColor = targetNode.data.nodeStyle.color ?? "#CCCCCC";
 
-        if (nodeTitle && (!targetNode.data.nodeLabel || /^defs\[\d+\]$/.test(targetNode.data.nodeLabel))) {
-            targetNode.data.nodeLabel = nodeTitle;
-        }
-
         edges.push({
             id: `${parentId}--${sourceHandle}--${schemaUri}--${targetHandle}`,
             type: "smoothstep",
@@ -275,11 +271,7 @@ const keywordHandlerMap: KeywordHandlerMap = {
     // "https://json-schema.org/keyword/dynamicRef": createBasicKeywordHandler("$dynamicRef"),
     // "https://json-schema.org/keyword/draft-2020-12/dynamicRef": createBasicKeywordHandler("$dynamicRef"),
     "https://json-schema.org/keyword/ref": (ast, keywordValue, nodes, edges, parentId, nodeDepth, renderedNodes) => {
-        const refUri = keywordValue as string;
-        const refTitle = refUri.includes("#/$defs/")
-            ? `$defs/${refUri.split("#/$defs/").pop()}`
-            : refUri.split("/").pop() || "$ref target";
-        processAST({ ast, schemaUri: refUri, nodes, edges, parentId, childId: "$ref", renderedNodes, nodeTitle: refTitle, nodeDepth });
+        processAST({ ast, schemaUri: keywordValue as string, nodes, edges, parentId, childId: "$ref", renderedNodes, nodeTitle: "", nodeDepth });
         return { key: "$ref", data: { value: keywordValue, ellipsis: "{ ... }" } }
     },
     "https://json-schema.org/keyword/comment": createBasicKeywordHandler("$comment"),
@@ -297,7 +289,8 @@ const keywordHandlerMap: KeywordHandlerMap = {
     "https://json-schema.org/keyword/$defs": (ast, keywordValue, nodes, edges, parentId, nodeDepth, renderedNodes) => {
         const value = keywordValue as string[];
         for (const [index, item] of value.entries()) {
-            processAST({ ast, schemaUri: item, nodes, edges, parentId, renderedNodes, childId: String(index), nodeTitle: `defs[${index}]`, nodeDepth });
+            const defName = item.includes("#/$defs/") ? `$defs/${item.split("#/$defs/").pop()}` : `defs[${index}]`;
+            processAST({ ast, schemaUri: item, nodes, edges, parentId, renderedNodes, childId: String(index), nodeTitle: defName, nodeDepth });
         }
         return { key: "$defs", data: { value: getArrayFromNumber(value.length) } }
     },
