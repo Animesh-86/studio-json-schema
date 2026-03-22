@@ -16,7 +16,7 @@ const FullscreenToggleButton = () => {
       {isFullScreen ? (
         <AiOutlineFullscreenExit size={20} />
       ) : (
-        <BsArrowsFullscreen size={16} />
+        <BsArrowsFullscreen/>
       )}
     </button>
   );
