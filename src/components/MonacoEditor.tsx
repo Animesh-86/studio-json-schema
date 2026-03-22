@@ -1,6 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { BsGithub, BsMoonStars, BsBook, BsSun } from "react-icons/bs";
-import { Tooltip } from "react-tooltip";
+
 import { parseTree, findNodeAtLocation } from "jsonc-parser";
 import {
   Panel,
@@ -23,7 +22,7 @@ import type { editor } from "monaco-editor";
 import defaultSchema from "../data/defaultJSONSchema.json";
 import { AppContext } from "../contexts/AppContext";
 import SchemaVisualization from "./SchemaVisualization";
-import FullscreenToggleButton from "./FullscreenToggleButton";
+import NavigationBar from "./NavigationBar";
 import EditorToggleButton from "./EditorToggleButton";
 import { parseSchema } from "../utils/parseSchema";
 import YAML from "js-yaml";
@@ -92,7 +91,7 @@ const saveSchemaJSON = (key: string, schema: JSONSchema) => {
 };
 
 const MonacoEditor = () => {
-  const { theme, toggleTheme, isFullScreen, containerRef, schemaFormat, changeSchemaFormat, selectedNode } =
+  const { theme, isFullScreen, containerRef, schemaFormat, selectedNode } =
     useContext(AppContext);
 
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
@@ -289,71 +288,7 @@ const MonacoEditor = () => {
       }`}
     >
       {isFullScreen && (
-        <ul className={`w-full px-4 py-1 bg-[var(--bg-color)] flex justify-end items-center gap-5 z-10 ${theme === 'light' ? 'shadow-md border-b-[1px] border-gray-200' : ''}`}>
-          <li className="flex items-center">
-            <select
-              onChange={(e) => changeSchemaFormat(e.target.value as SchemaFormat)}
-              className="text-sm border rounded-sm bg-[var(--bg-color)] text-[var(--dropdown-text-color)] border-[var(--navigation-text-color)] cursor-pointer"
-              value={schemaFormat}
-            >
-              <option value="json">JSON</option>
-              <option value="yaml">YAML</option>
-            </select>
-          </li>
-          <li className="flex items-center">
-            <button
-              className="text-xl cursor-pointer"
-              onClick={toggleTheme}
-              data-tooltip-id="fs-toggle-theme"
-            >
-              {theme === "light" ? (
-                <BsSun className="text-[var(--navigation-text-color)]" />
-              ) : (
-                <BsMoonStars className="text-[var(--navigation-text-color)]" />
-              )}
-            </button>
-            <Tooltip
-              id="fs-toggle-theme"
-              content="Better visuals in dark mode"
-              style={{ fontSize: "10px", zIndex: 100 }}
-            />
-          </li>
-          <li className="flex items-center">
-            <a
-              href="https://github.com/ioflux-org/studio-json-schema"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl flex items-center cursor-pointer"
-              data-tooltip-id="fs-github"
-            >
-              <BsGithub className="text-[var(--navigation-text-color)]" />
-              <Tooltip
-                id="fs-github"
-                content="Star on Github"
-                style={{ fontSize: "10px", zIndex: 100 }}
-              />
-            </a>
-          </li>
-          <li className="flex items-center">
-            <a
-              href="https://github.com/ioflux-org/studio-json-schema?tab=readme-ov-file#json-schema-visualizer"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl flex items-center cursor-pointer"
-              data-tooltip-id="fs-learn-keywords"
-            >
-              <BsBook className="text-[var(--navigation-text-color)]" />
-              <Tooltip
-                id="fs-learn-keywords"
-                content="Docs"
-                style={{ fontSize: "10px", zIndex: 100 }}
-              />
-            </a>
-          </li>
-          <li className="text-[var(--view-text-color)] flex items-center pr-2">
-            <FullscreenToggleButton />
-          </li>
-        </ul>
+        <NavigationBar />
       )}
       <PanelGroup direction="horizontal">
         <Panel

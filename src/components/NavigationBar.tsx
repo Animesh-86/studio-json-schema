@@ -5,30 +5,36 @@ import { AppContext, type SchemaFormat } from "../contexts/AppContext";
 import FullscreenToggleButton from "./FullscreenToggleButton";
 
 const NavigationBar = () => {
-  const { theme, toggleTheme, schemaFormat, changeSchemaFormat } =
+  const { theme, toggleTheme, schemaFormat, changeSchemaFormat, isFullScreen } =
     useContext(AppContext);
 
   return (
-    <nav className="h-[8vh] flex justify-between items-center shadow-lg relative z-10">
-      <div className="flex items-center text-center select-none">
-        <img
-          src={theme === "dark" ? "logo-dark.svg" : "logo-light.svg"}
-          alt="Studio JSON Schema"
-          className="w-15 h-15 md:w-15 md:h-15"
-          draggable="false"
-        />
+    <nav className={`flex items-center relative z-10 bg-[var(--bg-color)] ${
+      isFullScreen
+        ? `w-full px-4 py-1 justify-end ${theme === "light" ? "shadow-md border-b-[1px] border-gray-200" : ""}`
+        : "h-[8vh] justify-between shadow-lg"
+    }`}>
+      {!isFullScreen && (
+        <div className="flex items-center text-center select-none">
+          <img
+            src={theme === "dark" ? "logo-dark.svg" : "logo-light.svg"}
+            alt="Studio JSON Schema"
+            className="w-15 h-15 md:w-15 md:h-15"
+            draggable="false"
+          />
 
-        <div className="flex font-mono flex-col">
-          <span className="text-2xl font-bold  text-[var(--tool-name-color)]">
-            Studio
-          </span>
-          <span className="text-xs opacity-70 text-[var(--tool-name-color)]">
-            JSON Schema
-          </span>
+          <div className="flex font-mono flex-col">
+            <span className="text-2xl font-bold  text-[var(--tool-name-color)]">
+              Studio
+            </span>
+            <span className="text-xs opacity-70 text-[var(--tool-name-color)]">
+              JSON Schema
+            </span>
+          </div>
         </div>
-      </div>
+      )}
 
-      <ul className="flex items-center gap-5 mr-10">
+      <ul className={`flex items-center gap-5 ${isFullScreen ? 'mr-0' : 'mr-10'}`}>
         <li className="flex items-center">
           <select
             onChange={(e) => changeSchemaFormat(e.target.value as SchemaFormat)}
