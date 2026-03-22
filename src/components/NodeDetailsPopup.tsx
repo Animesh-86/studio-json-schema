@@ -91,8 +91,8 @@ const NodeDetailsPopup = ({
                     <td className="p-2 font-medium text-[var(--popup-text-color)] whitespace-nowrap">
                       {key}
                     </td>
-                    <td className="p-2 text-[var(--popup-text-color)]">
-                      <div className="max-h-[150px] overflow-auto pr-1">
+                    <td className="p-2 text-[var(--popup-text-color)] max-w-0">
+                      <div className="max-h-[150px] overflow-auto pr-1 break-words">
                         {formatValue(keyData.value as string)}
                       </div>
                     </td>
