@@ -306,7 +306,7 @@ const MonacoEditor = () => {
             </select>
           </div>
           <Editor
-            height="90%"
+            height="87%"
             width="100%"
             language={schemaFormat}
             value={schemaText}
