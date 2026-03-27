@@ -295,11 +295,11 @@ const MonacoEditor = () => {
           ref={editorPanelRef}
           collapsible
         >
-          <div className="flex items-center gap-2 px-2 py-1 border-b border-[var(--popup-border-color)] bg-[var(--validation-bg-color)]">
+          <div className="flex items-center gap-2 px-2 py-1 bg-[var(--validation-bg-color)]">
             <select
               value={schemaFormat}
               onChange={(e) => changeSchemaFormat(e.target.value as SchemaFormat)}
-              className="ml-auto flex-shrink-0 bg-transparent text-[var(--text-color)] text-sm outline-none cursor-pointer border border-[var(--popup-border-color)] rounded-sm"
+              className="ml-auto flex-shrink-0 bg-[var(--bg-color)] text-[var(--text-color)] text-sm outline-none cursor-pointer border border-[var(--popup-border-color)] rounded-sm"
             >
               <option value="json">JSON</option>
               <option value="yaml">YAML</option>
