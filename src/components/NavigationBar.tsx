@@ -57,13 +57,13 @@ const NavigationBar = () => {
               <BsMoonStars className="text-[var(--navigation-text-color)]" />
             )}
           </button>
-  {theme === "light" && (
-    <Tooltip
-      id="toggle-theme"
-      content="Better visuals in dark mode"
-      style={{ fontSize: "10px" }}
-    />
-  )}
+            {theme === "light" && (
+              <Tooltip
+                id="toggle-theme"
+                content="Better visuals in dark mode"
+                style={{ fontSize: "10px" }}
+              />
+            )}
 
 
         </li>
