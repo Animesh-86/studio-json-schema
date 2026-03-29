@@ -11,14 +11,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Check for changeset
         run: |
-          git fetch origin main
           CHANGED=$(git diff --name-only origin/main...HEAD | grep "^.changeset/.*\.md$" || true)
 
           if [ -z "$CHANGED" ]; then
-            echo "❌ No changeset found. Run 'npx changeset'"
+            echo "❌ No changeset found. Run 'npx changeset' locally to create one for your changes."
             exit 1
           fi
 
