@@ -1,11 +1,14 @@
-name: Changeset Check
-
 on:
   pull_request:
     branches:
       - main
-    branches-ignore:
-      - "changeset-release/**"
+    # Avoid triggering this check for automated versioning PRs.
+    # These PRs only update metadata and delete changesets, so they
+    # don't require a new changeset file to be added.
+    paths-ignore:
+      - "package.json"
+      - "CHANGELOG.md"
+      - ".changeset/**"
 
 jobs:
   changeset-check:
