@@ -36,3 +36,5 @@ jobs:
         with:
           commit: "chore: version bump"
           title: "chore: version bump"
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_RELEASE_PAT }}
