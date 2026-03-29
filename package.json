@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^14.1.1",
+    "@changesets/cli": "^2.30.0",
     "@dagrejs/dagre": "^1.1.5",
     "@hyperjump/json-schema": "^1.14.1",
     "@monaco-editor/react": "^4.7.0",
