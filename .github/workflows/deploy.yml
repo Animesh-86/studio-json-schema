@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "package.json"
+      - "CHANGELOG.md"
   workflow_dispatch:
 
 concurrency:
-  group: website-deploy-${{ github.ref }}
+  group: website-deploy-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: true
 
 permissions:
