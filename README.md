@@ -208,21 +208,27 @@ These issues will be addressed as time permits. If you encounter any other probl
 - Fork the repository
 
 ```bash
-   $ git clone https://github.com/ioflux-org/studio-json-schema.git
+git clone https://github.com/ioflux-org/studio-json-schema.git
 ```
 
-- Create a new branch  
-  `$ git checkout -b feature/my-feature`
+- Create a new branch
+
+```bash
+git checkout -b feature/my-feature
+```
+
 - Make your changes
 - Create a Pull Request
   - After making changes, don't forget to commit with the sign-off flag (-s)
+
   ```bash
-   $ git commit -s -m “commit message”
+  git commit -s -m "commit message"
   ```
 
   - Once all the changes have been commited, push the changes.
+
   ```bash
-    $ git push origin <branch-name>
+  git push origin <branch-name>
   ```
 
 ## Run locally
@@ -309,10 +315,13 @@ npx changeset
 
 Follow the prompt to select the package and bump type, then commit the generated file in `.changeset/`.
 
-You can skip adding a changeset for PRs that only modify:
+You can skip adding a changeset only when the PR modifies files ignored by the changeset check workflow:
 
-- `.github/**`
-- Markdown/docs files (`*.md`)
+- `package*.json`
+- `CHANGELOG.md`
+- `.changeset/**`
+
+For docs-only or CI/meta changes, ask a maintainer to apply the `skip changeset` label to bypass the check.
 
 ---
 
