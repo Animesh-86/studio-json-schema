@@ -303,25 +303,46 @@ Ways to contribute:
 - Fix bugs or implement new features
 - Suggest better visual or UX improvement
 
-### Versioning
+### Versioning Rules & Release Process
 
-We use [Changesets](https://github.com/changesets/changesets) for versioning and release notes.
+We use [Changesets](https://github.com/changesets/changesets) to manage versioning, changelogs, and releases.
 
-For PRs that change app behavior, UI, or functionality:
+When you make a change that affects the application (new features, bug fixes, UI updates), you must include a changeset.
+
+#### How to create a changeset
+
+Run the following command in your terminal:
 
 ```bash
 npx changeset
 ```
 
-Follow the prompt to select the package and bump type, then commit the generated file in `.changeset/`.
+The CLI will prompt you to select the package(s) to bump (select `json-schema-studio` if prompted).
 
-You can skip adding a changeset only when the PR modifies files ignored by the changeset check workflow:
+Choose the bump type according to Semantic Versioning (SemVer):
 
-- `package*.json`
-- `CHANGELOG.md`
-- `.changeset/**`
+- `major`: Breaking changes
+- `minor`: New features
+- `patch`: Bug fixes
 
-For docs-only or CI/meta changes, ask a maintainer to apply the `skip changeset` label to bypass the check.
+Provide a clear summary of your changes. This will be included in `CHANGELOG.md`.
+
+Once completed, a new markdown file will be generated in the `.changeset` folder. Commit this file along with your code changes.
+
+#### When you do NOT need a changeset
+
+You do not need to generate a changeset if your PR only touches:
+
+- `.github/**` (CI/CD workflows)
+- `*.md` files (Documentation)
+- Internal tests or tooling not affecting the shipped application
+
+#### Required post-implementation steps
+
+- Run relevant checks/tests locally.
+- Commit your code changes and generated changeset (if required).
+- Push your branch and open or update the PR.
+- Mention in the PR summary whether a changeset was added or intentionally skipped.
 
 ---
 
