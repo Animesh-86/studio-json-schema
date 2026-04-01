@@ -10,7 +10,7 @@ on:
     # don't require a new changeset file to be added.
     paths-ignore:
       - "package*.json"
-      - "CHANGELOG.md"
+      - "*.md"
       - ".changeset/**"
 
 permissions:
